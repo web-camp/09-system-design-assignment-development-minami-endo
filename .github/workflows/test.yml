@@ -1,0 +1,32 @@
+name: Ruby
+
+on:
+  pull_request:
+    branches: [ master ]
+jobs:
+  review_system_design_dev:
+    runs-on: ubuntu-latest
+    if: github.head_ref == 'system_design_dev'
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: autoapprove
+      if: success()
+      uses: hmarr/auto-approve-action@v2.0.0
+      with:
+        github-token: "${{ secrets.GITHUB_TOKEN }}"
+    - name: Add label
+      uses: actions/github-script@0.9.0
+      if: success()
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.issues.addLabels({
+            issue_number: context.payload.pull_request.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            labels: ['mentor-review']
+          })
