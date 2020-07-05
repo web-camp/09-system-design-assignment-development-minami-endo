@@ -1,2 +1,10 @@
 <h1>Admins::Genres#edit</h1>
 <p>Find me in app/views/admins/genres/edit.html.erb</p>
+
+<h3>ジャンル編集</h3>
+
+<span>ジャンル</span>
+<%= form_for(@genre) do |f| %>
+  <span>ジャンル</span>
+  <%= f.text_field :name %>
+<% end %>
