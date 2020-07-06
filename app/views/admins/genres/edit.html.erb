@@ -4,7 +4,8 @@
 <h3>ジャンル編集</h3>
 
 <span>ジャンル</span>
-<%= form_for(@genre) do |f| %>
+<%= form_for(@genre, url: admins_genre_path, method: :patch) do |f| %>
   <span>ジャンル</span>
   <%= f.text_field :name %>
+  <%= f.submit "変更を保存する", class:"btn btn-primary" %>
 <% end %>
