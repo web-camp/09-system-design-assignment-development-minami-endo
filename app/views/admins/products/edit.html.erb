@@ -4,8 +4,9 @@
 
 <h1>商品編集</h1>
 
+<%= attachment_image_tag @product, :image %>
 <%= form_for(@product, url: admins_product_path, method: :patch) do |f| %>
-  <p>画像</p>
+  <p><%= f.attachment_field :image %></p>
   <p>
   	<span>商品名</span>
   　<%= f.text_field :name %>

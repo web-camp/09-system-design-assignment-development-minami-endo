@@ -3,9 +3,10 @@
 
 <h1>新商品登録</h1>
 
-<p>画像</p>
 
 <%= form_for(@product, url: admins_products_path, method: :post) do |f| %>
+
+<%= f.attachment_field :image %>
   <p><span>商品名</span>
     <%= f.text_field :name %>
 </p>

@@ -16,9 +16,9 @@
 		<% @products.each do |product| %>
 		<tr>
 			<td><%= product.id %></td>
-			<td><%= product.name %></td>
+			<td><%= link_to product.name, admins_product_path(product.id) %></td>
 			<td><%= product.non_taxed_price %></td>
-			<td><%= product.genre_id %></td>
+			<td><%= genre.name %></td>
 			<td>ステータス</td>
 		</tr>
 		<% end %>

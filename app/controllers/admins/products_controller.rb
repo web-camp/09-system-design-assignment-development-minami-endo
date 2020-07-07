@@ -10,11 +10,12 @@ class Admins::ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.save
-    redirect_to admins_product_path(@product)
+    redirect_to admins_products_path
   end
 
   def show
     @product = Product.find(params[:id])
+    @genre = Genre.find(params[:id])
   end
 
   def edit
@@ -29,7 +30,7 @@ class Admins::ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :caption, :non_taxed_price, :genre_id, :image_id, :is_active)
+    params.require(:product, :genre).permit(:name, :caption, :non_taxed_price, :genre_id, :image, :is_active)
   end
 
 end
