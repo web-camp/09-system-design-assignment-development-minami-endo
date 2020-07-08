@@ -5,6 +5,7 @@ class Admins::ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @product.build_genre
   end
 
   def create
@@ -30,7 +31,7 @@ class Admins::ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product, :genre).permit(:name, :caption, :non_taxed_price, :genre_id, :image, :is_active)
+    params.require(:product).permit(:name, :caption, :non_taxed_price, :image, :is_active, genres: [:id, :name])
   end
 
 end

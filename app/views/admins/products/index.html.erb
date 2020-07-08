@@ -18,7 +18,7 @@
 			<td><%= product.id %></td>
 			<td><%= link_to product.name, admins_product_path(product.id) %></td>
 			<td><%= product.non_taxed_price %></td>
-			<td><%= genre.name %></td>
+			<td><%= product.genre %></td>
 			<td>ステータス</td>
 		</tr>
 		<% end %>

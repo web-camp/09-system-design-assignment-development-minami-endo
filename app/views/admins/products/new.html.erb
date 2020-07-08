@@ -9,10 +9,12 @@
 <%= f.attachment_field :image %>
   <p><span>商品名</span>
     <%= f.text_field :name %>
-</p>
+  </p>
   <span>商品説明</span>
     <%= f.text_area :caption %>
-  <p>ジャンル</p>
+  <p><span>ジャンル</span>
+    <%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "選択してください" %>
+  </p>
   <span>税抜価格</span>
     <%= f.text_field :non_taxed_price %>
   <p>販売ステータス</p>
