@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_04_015704) do
+ActiveRecord::Schema.define(version: 2020_07_09_020129) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 2020_07_04_015704) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "cart_products", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "product_id"
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "customers", force: :cascade do |t|
@@ -78,6 +86,27 @@ ActiveRecord::Schema.define(version: 2020_07_04_015704) do
     t.boolean "is_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "publics", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_publics_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_publics_on_reset_password_token", unique: true
+  end
+
+  create_table "shipping_addresses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "customer_id"
+    t.string "addressee"
+    t.string "address"
+    t.string "postal_code"
   end
 
 end

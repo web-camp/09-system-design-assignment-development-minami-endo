@@ -1,0 +1,30 @@
+<h1>Public::CartProducts#index</h1>
+<p>Find me in app/views/public/cart_products/index.html.erb</p>
+
+
+<h3>ショッピングカート</h3>
+
+<table>
+	<thead>
+		<tr>
+			<th>商品名</th>
+			<th>単価（税込）</th>
+			<th>数量</th>
+			<th>小計</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<%= @products.each do |product| %>
+			<td>写真<%= product.name %></td>
+			<td><%= product.non_taxed_price*1.1 %></td>
+			<td><%= form_for(@cart_product, url: public_cart_product_path(@product), method: :patch) do |f| %>
+				  <%= f.text_field :count %>
+				<%= f.submit "変更", class:"btn btn-primary" %>
+			</td>
+			<td></td>
+			<td>
+			<% end %>
+		</tr>
+	</tbody>
+</table>
