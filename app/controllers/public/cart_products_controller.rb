@@ -1,10 +1,6 @@
 class Public::CartProductsController < ApplicationController
-  before_action :setup_cart_product!, only: [:create, :update, :destroy, :destroy_all]
-
+  before_action :authenticate_customer!
   def index
-    @products = Product.all
-    @product = Product.find(params[:id])
-    @cart_product = @product.cart_product
   end
 
   def update
@@ -21,16 +17,21 @@ class Public::CartProductsController < ApplicationController
   end
 
   def create
-    if @cart_product.blank?
-      @cart_product = current_cart_product.cart_products.build(product_id: params[:product_id])
-    end
-    @cart_product.count += params[:count].to_i
+    @cart_product = CartProduct.new(cart_product_params)
+    @cart_product.customer_id = current_customer.id
+    if CartProduct.find_by(customer_id: current_customer.id, product_id: @cart_product.product_id)
+      @existing_cart_product = CartProduct.find_by(customer_id: current_customer.id, product_id: @cart_product.product_id)
+      @existing_cart_product.count += @cart_product.count
+      @existing_cart_product.save
+      redirect_to public_cart_products_path
+    else
     @cart_product.save
-    redirect_to current_cart_product
+    redirect_to public_cart_products_path
+  end
   end
 
   private
-  def setup_cart_product!
-    @cart_product = current_cart_product.cart_products.find_by(product_id: params[:product_id])
+  def cart_product_params
+    params.require(:cart_product).permit(:count, :product_id)
   end
 end

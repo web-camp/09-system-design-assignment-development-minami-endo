@@ -15,12 +15,13 @@
 	</thead>
 	<tbody>
 		<tr>
-			<%= @products.each do |product| %>
-			<td>写真<%= product.name %></td>
-			<td><%= product.non_taxed_price*1.1 %></td>
-			<td><%= form_for(@cart_product, url: public_cart_product_path(@product), method: :patch) do |f| %>
+			<% current_customer.cart_products.each do |cart_product| %>
+			<td>写真<%= cart_product.product.name %></td>
+			<td><%= cart_product.product.non_taxed_price*1.1 %></td>
+			<td><%= form_for(cart_product, url: public_cart_product_path(cart_product), method: :patch) do |f| %>
 				  <%= f.text_field :count %>
 				<%= f.submit "変更", class:"btn btn-primary" %>
+				<% end %>
 			</td>
 			<td></td>
 			<td>

@@ -9,7 +9,8 @@
 <%= @product.caption %>
 <p>¥<%= @product.non_taxed_price %>（税込）</p>
 <%= form_for(@cart_product, url: public_cart_products_path, method: :post) do |f| %>
-  <%= f.text_field :count %>
+  <%= f.select :count, [*1..10], include_blank: "個数を選択してください" %>
+  <%= f.hidden_field :product_id, value: @product.id %>
   <%= f.submit "カートに入れる", class:"btn btn-primary" %>
 <% end %>
 
