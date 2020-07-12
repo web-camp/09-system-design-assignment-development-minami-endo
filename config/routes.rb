@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
-    resources :cart_products, only:[:index, :update, :destroy, :destroy_all, :create]
+    resources :cart_products, only:[:index, :update, :destroy, :create]
+    delete '/cart_products', to: 'cart_products#destroy_all', as: "cart_product_destroy_all"
   end
 
   namespace :public do

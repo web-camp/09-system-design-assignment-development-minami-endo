@@ -4,7 +4,8 @@
 
 <h1>商品編集</h1>
 
-<%= attachment_image_tag @product, :image %>
+<%= attachment_image_tag @product, :image, size: '100x100' %>
+
 <%= form_for(@product, url: admins_product_path, method: :patch) do |f| %>
   <p><%= f.attachment_field :image %></p>
   <p>

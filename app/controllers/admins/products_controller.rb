@@ -16,7 +16,7 @@ class Admins::ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @genre = Genre.find(params[:id])
+    @genre = @product.genre
   end
 
   def edit
@@ -31,7 +31,7 @@ class Admins::ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :caption, :non_taxed_price, :image, :is_active, genres: [:id, :name])
+    params.require(:product).permit(:name, :caption, :non_taxed_price, :image, :is_active, :genre_id)
   end
 
 end

@@ -1,6 +1,7 @@
 class Public::CartProductsController < ApplicationController
   before_action :authenticate_customer!
   def index
+    @cart_products = CartProduct.all
   end
 
   def update
@@ -9,11 +10,14 @@ class Public::CartProductsController < ApplicationController
   end
 
   def destroy
+    @cart_product = CartProduct.find(params[:id])
     @cart_product.destroy
-    redirect_to current_cart_product
+    redirect_to public_cart_products_path
   end
 
   def destroy_all
+    @cart_products = current_customer.cart_products
+    @cart_products.destroy_all
   end
 
   def create

@@ -3,6 +3,7 @@
 
 
 <h3>ショッピングカート</h3>
+<%= link_to "カートを空にする", public_cart_product_destroy_all_path, method: :delete %>
 
 <table>
 	<thead>
@@ -20,10 +21,10 @@
 			<td><%= cart_product.product.non_taxed_price*1.1 %></td>
 			<td><%= form_for(cart_product, url: public_cart_product_path(cart_product), method: :patch) do |f| %>
 				  <%= f.text_field :count %>
-				<%= f.submit "変更", class:"btn btn-primary" %>
+				　<%= f.submit "変更", class:"btn btn-primary" %>
 				<% end %>
 			</td>
-			<td></td>
+			<td><%= link_to "削除", public_cart_product_path(cart_product), method: :delete %></td>
 			<td>
 			<% end %>
 		</tr>
