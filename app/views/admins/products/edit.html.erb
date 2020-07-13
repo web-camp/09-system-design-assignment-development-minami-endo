@@ -4,7 +4,7 @@
 
 <h1>商品編集</h1>
 
-<%= attachment_image_tag @product, :image, size: '100x100' %>
+<%= attachment_image_tag @product, :image, size: '150x100' %>
 
 <%= form_for(@product, url: admins_product_path, method: :patch) do |f| %>
   <p><%= f.attachment_field :image %></p>
@@ -18,7 +18,7 @@
   </p>
   <p>
   	<span>ジャンル</span>
-  	<%= f.text_field :genre_id %>
+    <%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "選択してください" %>
   </p>
   <p>
   	<span>税抜価格</span>

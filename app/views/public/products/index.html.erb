@@ -13,7 +13,7 @@
 <div class="col-lg-9">
 <h2>商品一覧</h2><h4>全x件</h4>
 	<% @products.each do |product| %>
-	  <%= product.image %>
+	  <%= attachment_image_tag product, :image, size: '150x100' %>
 	  <%= link_to product.name, public_product_path(product.id) %>
 	  <%= product.non_taxed_price %>
 	<% end %>

@@ -2,11 +2,16 @@ class Public::CartProductsController < ApplicationController
   before_action :authenticate_customer!
   def index
     @cart_products = CartProduct.all
+    @total_price = 0
+    @cart_products.each do |cart_product|
+      @total_price += cart_product.product.non_taxed_price * cart_product.count * 1.1
+    end
   end
 
   def update
-    @cart_product.update(count: params[:count].to_i)
-    redirect_to current_cart_product
+    cart_product = CartProduct.find(params[:id])
+    cart_product.update(cart_product_params)
+    redirect_to public_cart_products_path
   end
 
   def destroy
