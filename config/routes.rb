@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   }
 
   namespace :public do
-    resources :orders, only:[:comfirm, :new, :completed, :create, :index, :show]
+    get '/orders/completed', to: 'orders#completed'
+    get '/orders/comfirm', to: 'orders#comfirm', as: "orders_comfirm"
+    resources :orders, only:[:new, :create, :index, :show]
   end
 
   namespace :public do
@@ -28,6 +30,7 @@ Rails.application.routes.draw do
 
   namespace :public do
     resources :shipping_addresses, only:[:edit, :index, :update, :create, :destroy]
+    get '/shipping_addresses', to: 'shipping_addresses#index', as: "shipping_addresses_index"
   end
 
   namespace :admins do
