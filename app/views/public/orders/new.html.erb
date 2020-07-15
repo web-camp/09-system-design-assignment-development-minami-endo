@@ -4,7 +4,6 @@
 <h1>注文情報入力</h1>
 
 
-<%= link_to "test", public_orders_comfirm_path %>
 <%= form_with model: @order, url: public_orders_comfirm_path, method: :get, local: true do |f| %>
 
   <h3>支払方法</h3><br>

@@ -1,2 +1,48 @@
 <h1>Public::Orders#comfirm</h1>
 <p>Find me in app/views/public/orders/comfirm.html.erb</p>
+
+<h1>注文情報確認</h1>
+<table>
+	<thead>
+		<tr>
+			<th>商品名</th>
+			<th>単価（税込）</th>
+			<th>数量</th>
+			<th>小計</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @cart_products.each do |cart_product| %>
+		<tr>
+			<td><%= cart_product.product.name %></td>
+			<td><%= cart_product.product.non_taxed_price * 1.1.to_i %></td>
+			<td><%= cart_product.count %></td>
+			<td><%= cart_product.product.non_taxed_price * 1.1.to_i * cart_product.count %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<table>
+		<tr>
+			<th>送料</th>
+			<td>800</td>
+		</tr>
+		<tr>
+			<th>商品合計</th>
+			<td><%= @price_on_purchase.to_i %></td>
+		</tr>
+		<tr>
+			<th>請求金額</th>
+			<td><%= @price_on_purchase.to_i + 800 %></td>
+		</tr>
+</table>
+
+
+<h3>支払方法</h3>
+<%= @method_of_payment %>
+
+<h3>お届け先</h3>
+<%= @postal_code %><%= @address %><%= @first_name %><%= @last_name %><%= @addressee %>
+
+
