@@ -18,10 +18,14 @@ class Public::OrdersController < ApplicationController
       @first_name = current_customer.first_name
       @last_name = current_customer.last_name
     elsif params[:order][:select_address] == "登録済住所から選択"
-      @select_address = ShippingAddress.find(params[:id])
+      @select_address = ShippingAddress.find(params[:order][:shipping_address_id])
       @address = @select_address.address_info
     elsif params[:order][:select_address] == "新しいお届け先"
-      @select_address = ShippingAddress.find(params[:id])
+      @select_address = Order.new(order_params)
+      @select_address.save
+      @postal_code = @select_address.postal_code
+      @address = @select_address.address
+      @name = @select_address.name
     end
 
   end
@@ -46,6 +50,6 @@ class Public::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:method_of_payment, :name, :postal_code, :address, shipping_address: [:address_info])
+    params.require(:order).permit(:method_of_payment, :name, :postal_code, :address)
   end
 end

@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
-    resources :customers, only:[:edit, :show, :update, :unsubscribe, :withdraw]
+    resources :customers, only:[:edit, :show, :update]
+    get '/customers/unsubscribe', to: 'customers#unsubscribe'
+    patch '/customers/withdraw', to: 'customers#withdraw'
   end
 
   namespace :public do
