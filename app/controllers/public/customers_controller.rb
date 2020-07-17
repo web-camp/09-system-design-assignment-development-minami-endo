@@ -1,5 +1,8 @@
 class Public::CustomersController < ApplicationController
   def top
+    @genres = Genre.all
+    @products = Product.all
+    @products = Product.page(params[:page]).per(4)
   end
   def show
     @customer = current_customer
@@ -16,9 +19,20 @@ class Public::CustomersController < ApplicationController
   end
 
   def unsubscribe
+    @customer = current_customer
+    @customer.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
+    redirect_to public_root_path
   end
 
   def withdraw
+    @customer = current_customer
+    @customer.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
+    redirect_to root_path
+
   end
 
   private

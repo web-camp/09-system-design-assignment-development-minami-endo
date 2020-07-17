@@ -23,6 +23,7 @@ class Public::CartProductsController < ApplicationController
   def destroy_all
     @cart_products = current_customer.cart_products
     @cart_products.destroy_all
+    redirect_to public_products_path
   end
 
   def create
