@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_11_094918) do
+ActiveRecord::Schema.define(version: 2020_07_18_100050) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2020_07_11_094918) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
-    t.boolean "is_active"
+    t.boolean "is_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2020_07_11_094918) do
     t.integer "products_id"
     t.integer "count"
     t.integer "price_on_purchase"
-    t.integer "production_status"
+    t.integer "production_status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2020_07_11_094918) do
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "postage"
-    t.integer "order_status"
+    t.integer "order_status", default: 0
     t.integer "method_of_payment"
     t.string "name"
     t.string "postal_code"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2020_07_11_094918) do
     t.string "image_id"
     t.text "caption"
     t.integer "non_taxed_price"
-    t.boolean "is_active"
+    t.boolean "is_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

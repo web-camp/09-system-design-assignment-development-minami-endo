@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   namespace :public do
     get '/orders/completed', to: 'orders#completed'
-    get '/orders/comfirm', to: 'orders#comfirm', as: "orders_comfirm"
+    post '/orders/comfirm', to: 'orders#comfirm', as: "orders_comfirm"
     resources :orders, only:[:new, :create, :index, :show]
   end
 

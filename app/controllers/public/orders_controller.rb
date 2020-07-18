@@ -1,5 +1,8 @@
 class Public::OrdersController < ApplicationController
+  POSTAGE=800
   def comfirm
+    @order_product=OrderProduct.new
+    @order = Order.new
     @cart_products = current_customer.cart_products
     @price_on_purchase = 0
     @cart_products.each do |cart_product|
@@ -12,15 +15,22 @@ class Public::OrdersController < ApplicationController
       @method_of_payment = "銀行振込"
     end
 
-    if params[:order][:select_address] == "ご自身の住所"
-      @postal_code = current_customer.postal_code
-      @address = current_customer.address
-      @first_name = current_customer.first_name
-      @last_name = current_customer.last_name
-    elsif params[:order][:select_address] == "登録済住所から選択"
+    if params[:select] == "1"
+      @order.customer_id = current_customer.id
+      @order.postal_code = current_customer.postal_code
+      @postal_code=@order.postal_code
+      @order.address = current_customer.address
+      @address=@order.address
+      @order.name = current_customer.first_name
+      @first_name=@order.name
+      @last_name=current_customer.last_name
+      @order.postage = POSTAGE
+      @order.method_of_payment = @method_of_payment
+      @order.billing_amount = @price_on_purchase+POSTAGE
+    elsif params[:select] == "2"
       @select_address = ShippingAddress.find(params[:order][:shipping_address_id])
       @address = @select_address.address_info
-    elsif params[:order][:select_address] == "新しいお届け先"
+    elsif params[:select] == "3"
       @select_address = Order.new(order_params)
       @select_address.save
       @postal_code = @select_address.postal_code
@@ -38,18 +48,26 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
+
+    @order=Order.new(order_params)
     @order.save
+    #current_customer.cart_products.each do |cart_product|
+    #  @order_product = cart_product.product.order_products.new(order_id: cart_product.order.id, count: cart_product.count, price_on_purchase: cart_product.product.non_taxed_price)
+    #  @order_product.save
+    #  cart_product.destroy
+    #end
   end
 
   def index
+    @orders = Order.all
+    
   end
 
   def show
   end
-
   private
   def order_params
-    params.require(:order).permit(:method_of_payment, :name, :postal_code, :address)
+    params.require(:order).permit(:customer_id, :postage, :method_of_payment, :name, :postal_code, :address, :billing_amount)
   end
+
 end
