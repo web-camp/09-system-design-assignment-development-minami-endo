@@ -2,9 +2,9 @@
 <p>Find me in app/views/public/customers/show.html.erb</p>
 
 <h1>マイページ</h1>
-<h3>登録情報</h3>
-<%= link_to "編集する", url: edit_public_customer_path(@customer), class:"btn btn-primary" %>
-<span>パスワードを変更する後で</span>
+<font size="5">登録情報</font>
+<%= link_to "編集する", edit_public_customer_path(@customer), class:"btn btn-primary" %>
+<%= link_to "パスワードを変更する", edit_customer_password_path(@customer), class:"btn btn-primary" %>
 
 <table>
 		<tr>

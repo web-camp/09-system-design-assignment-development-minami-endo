@@ -20,7 +20,7 @@
 			<td><%= attachment_image_tag cart_product.product, :image, size: '150x100' %>
 				<%= cart_product.product.name %>
 			</td>
-			<td><%= cart_product.product.non_taxed_price * 1.1.to_i %></td>
+			<td><%= cart_product.product.non_taxed_price.to_i * 1.1 %></td>
 			<td><%= form_for(cart_product, url: public_cart_product_path(cart_product), method: :patch) do |f| %>
 				  <%= f.text_field :count %>
 				　<%= f.submit "変更", class:"btn btn-primary" %>
