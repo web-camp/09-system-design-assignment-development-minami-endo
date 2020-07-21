@@ -19,17 +19,17 @@
             <li><%= link_to "会員一覧", admins_customers_path %></li>
             <li><%= link_to "注文履歴一覧", '#' %></li>
             <li><%= link_to "ジャンル一覧", admins_genres_path %></li>
-            <li><%= link_to "ログアウト", destroy_admin_session_path %></li>
+            <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
           <% elsif customer_signed_in? %>
             <li>ようこそ、<%= current_customer.first_name %><%= current_customer.last_name %>さん！</li>
             <li><%= link_to "マイページ", public_customers_my_page_path %></li>
             <li><%= link_to "商品一覧", public_products_path %></li>
             <li><%= link_to "カート", public_cart_products_path %></li>
-            <li><%= link_to "ログアウト", destroy_customer_session_path %></li>
+            <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
           <% else  %>
             <li><%= link_to "商品一覧", public_products_path %></li>
-            <li><%= link_to "新規登録", admins_customers_path %></li>
-            <li><%= link_to "ログイン", '#' %></li>
+            <li><%= link_to "新規登録", new_customer_registration_path %></li>
+            <li><%= link_to "ログイン", customer_session_path %></li>
           <% end %>
         </ul>
       </div>

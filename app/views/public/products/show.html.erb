@@ -19,7 +19,7 @@
   <div class="col-lg-6">
 	<span class="name"><%= @product.name %></span><br>
 	<span><%= @product.caption %></span>
-	<p>¥<%= @product.non_taxed_price %>（税込）</p>
+	<p><%= number_to_currency(@product.non_taxed_price.to_i * 1.1, unit: "￥", strip_insignificant_zeros: true) %>（税込）</p>
 	<%= form_for(@cart_product, url: public_cart_products_path, method: :post) do |f| %>
 	  <%= f.select :count, [*1..10], include_blank: "個数を選択してください" %>
 	  <%= f.hidden_field :product_id, value: @product.id %>

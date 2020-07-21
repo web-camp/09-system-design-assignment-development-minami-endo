@@ -20,7 +20,7 @@
 			<td><%= attachment_image_tag cart_product.product, :image, size: '150x100' %>
 				<%= cart_product.product.name %>
 			</td>
-			<td><%= cart_product.product.non_taxed_price.to_i * 1.1 %></td>
+			<td><%= number_to_currency(cart_product.product.non_taxed_price.to_i * 1.1, unit: "￥", strip_insignificant_zeros: true) %></td>
 			<td><%= form_for(cart_product, url: public_cart_product_path(cart_product), method: :patch) do |f| %>
 				  <%= f.text_field :count %>
 				　<%= f.submit "変更", class:"btn btn-primary" %>
@@ -33,7 +33,7 @@
 </table>
 
 <p class="text-right">
-	<span class="border">合計金額</span><span class="border"><%= @total_price.to_i %></span>
+	<span class="border">合計金額</span><span class="border"><%= number_to_currency(@total_price, unit: "￥", strip_insignificant_zeros: true) %></span>
 </p>
 
 <p>

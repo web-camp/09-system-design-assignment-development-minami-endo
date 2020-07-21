@@ -21,8 +21,8 @@ Rails.application.routes.draw do
 
   namespace :public do
     resources :products, only:[:index, :show, :top]
-    root 'customers#top'
     get '/products/genre_search', to: 'products#genre_search'
+
   end
 
   namespace :public do
@@ -57,7 +57,7 @@ Rails.application.routes.draw do
   	resources :genres, only:[:index, :create, :edit, :update]
   end
 
-
+  root 'public/customers#top'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

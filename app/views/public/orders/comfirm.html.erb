@@ -15,9 +15,9 @@
 		<% @cart_products.each do |cart_product| %>
 		<tr>
 			<td><%= cart_product.product.name %></td>
-			<td><%= cart_product.product.non_taxed_price * 1.1.to_i %></td>
+			<td><%= number_to_currency(cart_product.product.non_taxed_price.to_i * 1.1, unit: "￥", strip_insignificant_zeros: true) %></td>
 			<td><%= cart_product.count %></td>
-			<td><%= cart_product.product.non_taxed_price * 1.1.to_i * cart_product.count %></td>
+			<td><%= number_to_currency(cart_product.product.non_taxed_price.to_i * 1.1 * cart_product.count, unit: "￥", strip_insignificant_zeros: true) %></td>
 		</tr>
 		<% end %>
 	</tbody>
@@ -26,15 +26,15 @@
 <table>
 		<tr>
 			<th>送料</th>
-			<td>800</td>
+			<td><%= number_to_currency(800, unit: "￥", strip_insignificant_zeros: true) %></td>
 		</tr>
 		<tr>
 			<th>商品合計</th>
-			<td><%= @price_on_purchase.to_i %></td>
+			<td><%= number_to_currency(@price_on_purchase, unit: "￥", strip_insignificant_zeros: true) %></td>
 		</tr>
 		<tr>
 			<th>請求金額</th>
-			<td><%= @price_on_purchase.to_i + 800 %></td>
+			<td><%= number_to_currency(@price_on_purchase + 800, unit: "￥", strip_insignificant_zeros: true) %></td>
 		</tr>
 </table>
 

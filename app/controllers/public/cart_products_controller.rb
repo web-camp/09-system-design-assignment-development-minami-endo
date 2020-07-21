@@ -2,6 +2,7 @@ class Public::CartProductsController < ApplicationController
   before_action :authenticate_customer!
   def index
     @cart_products = CartProduct.all
+    @cart_products = current_customer.cart_products
     @total_price = 0
     @cart_products.each do |cart_product|
       @total_price += cart_product.product.non_taxed_price * cart_product.count * 1.1

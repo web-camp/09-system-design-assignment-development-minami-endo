@@ -14,7 +14,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new
     @price_on_purchase = 0
     @cart_products.each do |cart_product|
-      @price_on_purchase += cart_product.product.non_taxed_price * 1.1.to_i * cart_product.count
+      @price_on_purchase += cart_product.product.non_taxed_price.to_i * 1.1 * cart_product.count
     end
 
     if params[:order][:method_of_payment] == "クレジットカード"
@@ -68,6 +68,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def completed
+    @cart_products = current_customer.cart_products
+    @cart_products.destroy
   end
 
   def create

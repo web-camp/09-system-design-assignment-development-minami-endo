@@ -18,7 +18,7 @@
 		<% @products.each do |product| %>
 		  <%= attachment_image_tag product, :image, size: '150x100' %>
 		  <%= link_to product.name, public_product_path(product.id) %>
-		  ¥<%= product.non_taxed_price %>
+      <%= number_to_currency(product.non_taxed_price.to_i * 1.1, unit: "￥", strip_insignificant_zeros: true) %>
 	    <% end %>
   </div>
 </div>
