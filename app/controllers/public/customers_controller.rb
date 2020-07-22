@@ -20,10 +20,7 @@ class Public::CustomersController < ApplicationController
 
   def unsubscribe
     @customer = current_customer
-    @customer.update(is_deleted: true)
-    reset_session
-    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
-    redirect_to public_root_path
+    
   end
 
   def withdraw
@@ -37,6 +34,6 @@ class Public::CustomersController < ApplicationController
 
   private
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :first_name_katakana, :last_name_katakana, :email, :phone_number, :address, :postal_code)
+    params.require(:customer).permit(:first_name, :last_name, :first_name_katakana, :last_name_katakana, :email, :phone_number, :address, :postal_code, :is_deleted)
   end
 end

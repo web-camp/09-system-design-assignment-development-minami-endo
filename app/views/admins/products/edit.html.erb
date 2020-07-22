@@ -26,7 +26,7 @@
   </p>
   <p>
     <span>販売ステータス</span>
-    <%= f.check_box :is_active, autofocus: true %>
+    <%= f.select :is_active, Product.is_actives_i18n.invert, include_blank: "個数を選択してください" %>
   </p>
   <%= f.submit "変更を保存", class:"btn btn-primary" %>
 

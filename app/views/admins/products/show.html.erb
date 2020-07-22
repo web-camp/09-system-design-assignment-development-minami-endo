@@ -17,10 +17,6 @@
 <span>税抜価格</span>
   <%= @product.non_taxed_price %>
 <p>販売ステータス</p>
-  <% if :is_active == true %>
-    <p>販売中</p>
-  <% else %>
-    <p>販売停止</p>
-  <% end %>
+  <%= @product.is_active_i18n %>
 
 <%= link_to "編集する", edit_admins_product_path(@product), class:"btn btn-primary" %>

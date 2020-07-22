@@ -18,8 +18,8 @@
 			<td><%= product.id %></td>
 			<td><%= link_to product.name, admins_product_path(product.id) %></td>
 			<td><%= product.non_taxed_price %></td>
-			
-			<td>ステータス</td>
+		    <td><%= product.genre.name %></td>
+			<td><%= product.is_active_i18n %></td>
 		</tr>
 		<% end %>
 	</tbody>
