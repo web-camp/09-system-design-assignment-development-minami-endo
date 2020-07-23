@@ -1,15 +1,6 @@
 class Public::OrdersController < ApplicationController
   POSTAGE = 800
   def comfirm
-   
-   # @cart_product = CartProduct.find(params[:id])
-   # @order_product = OrderProduct.new
-   # @order_product.product_id = @cart_product.product.id
-   # @order_product.order_id = @order.id
-   # @order_product.count = @cart_products.count
-   # @order_product.price_on_purchase = @price_on_purchase
-   # @order_product.save
-
     @cart_products = current_customer.cart_products
     @order = Order.new
     @price_on_purchase = 0
@@ -60,7 +51,6 @@ class Public::OrdersController < ApplicationController
       @order.method_of_payment = @method_of_payment
       @order.billing_amount = @price_on_purchase + POSTAGE
     end
-    @order.save
   end
 
   def new
@@ -73,7 +63,27 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+    order = Order.new
+    order.postal_code = params[:order][:postal_code]
+    order.address = params[:order][:address]
+    order.name = params[:order][:name]
+    order.customer_id = params[:order][:customer_id]
+    order.method_of_payment = params[:order][:method_of_payment]
+    order.billing_amount = params[:order][:billing_amount]
+    order.postage = POSTAGE
+    order.save
+
+    cart_products = current_customer.cart_products
+    @cart_products.each do |cart_product|
+      @price_on_purchase += cart_product.product.non_taxed_price.to_i * 1.1 * cart_product.count
+    end
+    order_product = OrderProduct.new
+    order_product.count = params[:cart_product][:count]
+    order_product.price_on_purchase = @price_on_purchase
+
+    order_product.save
     @cart_products = current_customer.cart_products
+
     @cart_products.destroy
     redirect_to public_orders_completed_path
 

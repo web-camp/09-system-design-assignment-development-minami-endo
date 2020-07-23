@@ -1,8 +1,7 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!
+
   def top
-    @genres = Genre.all
-    @products = Product.all
-    @products = Product.page(params[:page]).per(4)
   end
   def show
     @customer = current_customer
@@ -20,7 +19,6 @@ class Public::CustomersController < ApplicationController
 
   def unsubscribe
     @customer = current_customer
-    
   end
 
   def withdraw

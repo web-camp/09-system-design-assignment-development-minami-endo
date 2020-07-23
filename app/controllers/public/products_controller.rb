@@ -2,6 +2,7 @@ class Public::ProductsController < ApplicationController
   def top
   	@genres = Genre.all
   	@products = Product.all
+    @products = Product.page(params[:page]).per(4)
   end
 
   def genre_search
