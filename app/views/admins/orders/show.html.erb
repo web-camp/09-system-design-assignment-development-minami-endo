@@ -5,44 +5,30 @@
 
 <p>
 	<span>購入者</span>
-	<%= link_to @order.name, admins_customer_path(@order) %>
+	<%= @order.name %>
 </p>
 
 <p>
 	<span>配送先</span>
-	<%= @order.postal_code %><%= @order.address %>
-	<p>氏名</p>
+	<%= @order.postal_code %><%= @order.address %></br>
+	<%= @order.name %>
 </p>
 
 <p>
 	<span>支払方法</span>
+	<%= @order.method_of_payment %>
 </p>
 
 <p>注文ステータス</p>
+<%= form_for(@order, url: admins_order_path(@order), method: :patch) do |f| %>
+  <%= f.select :order_status, Order.order_statuses_i18n.invert %>
 
 
-<table>
-	<thead>
-		<tr>
-			<th>商品名</th>
-			<th>単価（税込）</th>
-			<th>数量</th>
-			<th>小計</th>
-			<th>製作ステータス</th>
-		</tr>
-	</thead>
-	<tbody>
-		<%= @orders.each do |order| %>
-		<tr>
-			<td><%= @order.name %></td>
-			<td>単価</td>
-			<td>数量</td>
-			<td>小計</td>
-			<td>製作ステータス</td>
-            <td>更新ボタン</td>
-		</tr>
-		<% end %>
-	</tbody>
-</table>
+
+  <%= f.submit "更新" %>
+<% end %>
+
+
+
 
 

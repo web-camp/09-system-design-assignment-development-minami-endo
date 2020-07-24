@@ -27,11 +27,7 @@
   				  <%= order_product.product.name %>
   				<% end %>
   			</td>
-  			<td>
-  				<% order.order_products.each do |order_product| %>
-  				  <%= order_product.price_on_purchase %>
-  				<% end %>
-  			</td>
+  			<td><%= order.billing_amount.to_i + 800 %></td>
   			<td>ステータス</td>
   			<td><%= link_to "表示する", public_order_path(order), class:"btn btn-primary" %></td>
   		</tr>

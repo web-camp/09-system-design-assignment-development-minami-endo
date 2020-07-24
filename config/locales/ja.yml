@@ -8,3 +8,11 @@ ja:
       is_active:
         effectiveness: "有効"
         unavailable: "無効"
+    order:
+      order_status:
+        wating_for_payment: "製作待ち"
+        payment_comfirmation: "入金待ち"
+        in_production: "製作中"
+        preparation_for_shipment: "製作完了"
+        sent: "発送完了"
+

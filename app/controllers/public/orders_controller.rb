@@ -73,31 +73,30 @@ class Public::OrdersController < ApplicationController
     order.postage = POSTAGE
     order.save
 
-    cart_products = current_customer.cart_products
-    @cart_products.each do |cart_product|
-      @price_on_purchase += cart_product.product.non_taxed_price.to_i * 1.1 * cart_product.count
-    end
     order_product = OrderProduct.new
-    order_product.count = params[:cart_product][:count]
-    order_product.price_on_purchase = @price_on_purchase
+
+    cart_products = current_customer.cart_products
+    cart_products.each do |cart_product|
+      order_product.count = cart_product.count
+    end
 
     order_product.save
-    @cart_products = current_customer.cart_products
 
-    @cart_products.destroy
+    cart_products = current_customer.cart_products
+    cart_products.destroy
     redirect_to public_orders_completed_path
 
   end
 
   def index
     @orders = Order.all
-    @order_products = OrderProduct.all
-    
-
+    order_products = OrderProduct.all
 
   end
 
   def show
+    orders = current_customer.orders
+    order_products = current_customer.order_products
   end
   private
   def order_params
