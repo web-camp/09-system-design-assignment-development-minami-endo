@@ -78,26 +78,29 @@ class Public::OrdersController < ApplicationController
     cart_products = current_customer.cart_products
     cart_products.each do |cart_product|
       order_product.count = cart_product.count
+      order_product.price_on_purchase = cart_product.product.non_taxed_price
+      order_product.order_id = order.id
+      order_product.product_id = cart_product.product.id
+      order_product.save
     end
 
-    order_product.save
 
-    cart_products = current_customer.cart_products
     cart_products.destroy
     redirect_to public_orders_completed_path
 
   end
 
   def index
-    @orders = Order.all
+    orders = Order.all
     order_products = OrderProduct.all
 
   end
 
   def show
-    orders = current_customer.orders
-    order_products = current_customer.order_products
+    @order = Order.find(params[:id])
+    @order_products = @order.order_products
   end
+
   private
   def order_params
     params.require(:order).permit(:customer_id, :postage, :method_of_payment, :name, :postal_code, :address, :billing_amount)
