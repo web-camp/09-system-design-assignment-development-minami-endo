@@ -1,6 +1,7 @@
 <h1>Admins::Products#index</h1>
 <p>Find me in app/views/admins/products/index.html.erb</p>
 
+
 <h1>商品一覧</h1>
 <table>
 	<thead>
@@ -14,6 +15,7 @@
 	</thead>
 	<tbody>
 		<% @products.each do |product| %>
+		<% if product.genre.is_active == "effectiveness" %>
 		<tr>
 			<td><%= product.id %></td>
 			<td><%= link_to product.name, admins_product_path(product.id) %></td>
@@ -22,6 +24,6 @@
 			<td><%= product.is_active_i18n %></td>
 		</tr>
 		<% end %>
+		<% end %>
 	</tbody>
 </table>
-

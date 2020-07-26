@@ -75,3 +75,5 @@ gem 'kaminari'
 gem 'pry-byebug'
 
 gem 'enum_help'
+
+gem 'pry-rails'

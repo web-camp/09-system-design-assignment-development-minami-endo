@@ -73,10 +73,9 @@ class Public::OrdersController < ApplicationController
     order.postage = POSTAGE
     order.save
 
-    order_product = OrderProduct.new
-
     cart_products = current_customer.cart_products
     cart_products.each do |cart_product|
+      order_product = OrderProduct.new
       order_product.count = cart_product.count
       order_product.price_on_purchase = cart_product.product.non_taxed_price
       order_product.order_id = order.id
@@ -84,14 +83,13 @@ class Public::OrdersController < ApplicationController
       order_product.save
     end
 
-
-    cart_products.destroy
+    cart_products.destroy_all
     redirect_to public_orders_completed_path
 
   end
 
   def index
-    orders = Order.all
+    @orders = Order.all
     order_products = OrderProduct.all
 
   end

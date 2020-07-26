@@ -15,7 +15,7 @@
   		</tr>
   	</thead>
   	<tbody>
-  		<% orders.each do |order| %>
+  		<% @orders.each do |order| %>
   		<tr>
   			<td><%= order.created_at %></td>
   			<td><%= order.postal_code %>
@@ -28,7 +28,7 @@
   				<% end %>
   			</td>
   			<td><%= order.billing_amount.to_i + 800 %></td>
-  			<td>ステータス</td>
+  			<td><%= order.order_status_i18n %></td>
   			<td><%= link_to "表示する", public_order_path(order), class:"btn btn-primary" %></td>
   		</tr>
   		<% end %>

@@ -6,4 +6,10 @@ class Customer < ApplicationRecord
   has_many :cart_products, dependent: :destroy
   has_many :shipping_addresses, dependent: :destroy
   has_many :orders, dependent: :destroy
+
+  enum is_deleted: { available: false, withdrawal: true }
+  def active_for_authentication?
+        super && (self.is_deleted == "available")
+  end
+
 end
