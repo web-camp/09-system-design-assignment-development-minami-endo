@@ -5,7 +5,7 @@
 
 <p>
 	<span>購入者</span>
-	<%= @order.name %>
+	<%= current_customer.first_name %><%= current_customer.last_name %>
 </p>
 
 <p>
@@ -40,13 +40,14 @@
 	<tbody>
 		<tr>
 			<td><%= order_product.product.name %></td>
-			<td><%= order_product.product.non_taxed_price + 800 %></td>
+			<td><%= order_product.price_on_purchase * 1.1.to_i %></td>
 			<td><%= order_product.count %></td>
-			<td><%= order_product.order.billing_amount %></td>
+			<td><%= order_product.price_on_purchase * order_product.count * 1.1.to_i %></td>
 			<td>
                 <%= form_with model: order_product, url: admins_order_path(order_product), method: :patch, local: true do |f| %>
                   <%= hidden_field_tag :select_value, "2" %>
                   <%= hidden_field_tag :product_id, order_product.product_id %>
+                  <%= hidden_field_tag :id, order_product.id %>
 				  <%= f.select :production_status, OrderProduct.production_statuses_i18n.keys.map {|k| [I18n.t("enums.order_product.production_status.#{k}"), k]} %>
                   <%= f.submit "更新", class:"btn btn-primary" %>
                 <% end %>

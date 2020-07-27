@@ -16,6 +16,7 @@
 	</thead>
 	<tbody>
 		<% current_customer.cart_products.each do |cart_product| %>
+		<% if cart_product.product.is_active == "now_sale" %>
 		<tr>
 			<td><%= attachment_image_tag cart_product.product, :image, size: '150x100' %>
 				<%= cart_product.product.name %>
@@ -28,6 +29,7 @@
 			</td>
 			<td><%= link_to "削除", public_cart_product_path(cart_product), method: :delete, class:"btn btn-danger" %></td>
 		</tr>
+		<% end %>
 		<% end %>
 	</tbody>
 </table>

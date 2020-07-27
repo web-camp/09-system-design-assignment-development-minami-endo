@@ -21,8 +21,7 @@ class Admins::OrdersController < ApplicationController
       end
       redirect_to admins_order_path(@order)
     elsif params[:select_value] == "2"
-      @order_product = OrderProduct.find_by(product_id: params[:product_id])
-
+      @order_product = OrderProduct.find_by(product_id: params[:product_id], id: params[:id])
       @order_product.update(order_product_params)
 
       if params[:order_product][:production_status] == "in_production"
@@ -35,15 +34,12 @@ class Admins::OrdersController < ApplicationController
           total += 1
         end
       end
-      if total == @order_product.product.order_products
-        order.update(order_status: "preparation_for_shipment")
+      if total == @order_product.count
+        @order_product.order.update(order_status: "preparation_for_shipment")
       end
       redirect_to admins_order_path(@order_product.order.id)
     end
-
-
-   
- end
+  end
 
 
 

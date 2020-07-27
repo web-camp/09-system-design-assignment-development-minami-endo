@@ -18,13 +18,13 @@
   		<% @orders.each do |order| %>
   		<tr>
   			<td><%= order.created_at %></td>
-  			<td><%= order.postal_code %>
-  				<%= order.address %>
+  			<td><%= order.postal_code %><br>
+  				<%= order.address %><br>
   				<%= order.name %>
   			</td>
   			<td>
   				<% order.order_products.each do |order_product| %>
-  				  <%= order_product.product.name %>
+  				  <%= order_product.product.name %><br>
   				<% end %>
   			</td>
   			<td><%= order.billing_amount.to_i + 800 %></td>

@@ -6,12 +6,15 @@ class Public::ProductsController < ApplicationController
   end
 
   def genre_search
+    @genres = Genre.all
     @genre = Genre.find(params[:id])
     @products = @genre.products
+    @product_count = Product.count
   end
 
   def index
     @genres = Genre.all
+
   	@products = Product.all
     @product_count = Product.count
   end

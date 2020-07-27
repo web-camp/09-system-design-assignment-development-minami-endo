@@ -5,7 +5,9 @@ class Public::OrdersController < ApplicationController
     @order = Order.new
     @price_on_purchase = 0
     @cart_products.each do |cart_product|
-      @price_on_purchase += cart_product.product.non_taxed_price.to_i * 1.1 * cart_product.count
+      if cart_product.product.is_active == "now_sale"
+        @price_on_purchase += cart_product.product.non_taxed_price.to_i * 1.1 * cart_product.count
+      end
     end
 
     if params[:order][:method_of_payment] == "クレジットカード"
@@ -75,12 +77,14 @@ class Public::OrdersController < ApplicationController
 
     cart_products = current_customer.cart_products
     cart_products.each do |cart_product|
-      order_product = OrderProduct.new
-      order_product.count = cart_product.count
-      order_product.price_on_purchase = cart_product.product.non_taxed_price
-      order_product.order_id = order.id
-      order_product.product_id = cart_product.product.id
-      order_product.save
+      if cart_product.product.is_active == "now_sale"
+        order_product = OrderProduct.new
+        order_product.count = cart_product.count
+        order_product.price_on_purchase = cart_product.product.non_taxed_price
+        order_product.order_id = order.id
+        order_product.product_id = cart_product.product.id
+        order_product.save
+      end
     end
 
     cart_products.destroy_all
@@ -89,7 +93,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
+    @orders = current_customer.orders
     order_products = OrderProduct.all
 
   end

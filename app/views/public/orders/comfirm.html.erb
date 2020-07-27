@@ -13,12 +13,14 @@
 	</thead>
 	<tbody>
 		<% @cart_products.each do |cart_product| %>
+		<% if cart_product.product.is_active == "now_sale" %>
 		<tr>
 			<td><%= cart_product.product.name %></td>
 			<td><%= number_to_currency(cart_product.product.non_taxed_price.to_i * 1.1, unit: "￥", strip_insignificant_zeros: true) %></td>
 			<td><%= cart_product.count %></td>
 			<td><%= number_to_currency(cart_product.product.non_taxed_price.to_i * 1.1 * cart_product.count, unit: "￥", strip_insignificant_zeros: true) %></td>
 		</tr>
+		<% end %>
 		<% end %>
 	</tbody>
 </table>

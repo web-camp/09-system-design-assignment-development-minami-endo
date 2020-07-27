@@ -2,7 +2,7 @@
 <p>Find me in app/views/public/orders/show.html.erb</p>
 
 <font size="5" class="p-3 mb-2 bg-warning text-dark ">注文履歴詳細</font>
-<span>注文情報</span>
+<p>注文情報</p>
 <table>
 	<tr>
 		<th>注文日</th>
@@ -10,9 +10,11 @@
 	</tr>
 	<tr>
 		<th>配送先</th>
-		<td><%= @order.postal_code %></td>
-		<td><%= @order.address %></td>
-		<td><%= @order.name %></td>
+		<td>
+			<%= @order.postal_code %><br>
+		    <%= @order.address %><br>
+		    <%= @order.name %>
+		</td>
 	</tr>
 	<tr>
 		<th>支払方法</th>
