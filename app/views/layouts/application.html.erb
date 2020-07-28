@@ -20,6 +20,11 @@
             <li><%= link_to "注文履歴一覧", '#' %></li>
             <li><%= link_to "ジャンル一覧", admins_genres_path %></li>
             <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+            <%= form_tag(admins_products_path, :method => 'get' ) do %>
+              <%= text_field_tag :search %>
+              <%= submit_tag 'Search', :name => nil %>
+            <% end %>
+
           <% elsif customer_signed_in? %>
             <li>ようこそ、<%= current_customer.first_name %><%= current_customer.last_name %>さん！</li>
             <li><%= link_to "マイページ", public_customers_my_page_path %></li>

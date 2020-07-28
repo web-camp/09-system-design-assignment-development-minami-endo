@@ -1,7 +1,13 @@
 class Admins::ProductsController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @products = Product.all
+    @products_search = Product.search(params[:search])
+  end
+
+  def top
+    @order = Order.all
   end
 
   def new
@@ -12,7 +18,7 @@ class Admins::ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.save
-    redirect_to admins_products_path
+    redirect_to admins_product_path(@product)
   end
 
   def show

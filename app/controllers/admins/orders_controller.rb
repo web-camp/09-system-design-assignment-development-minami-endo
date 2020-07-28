@@ -1,4 +1,5 @@
 class Admins::OrdersController < ApplicationController
+  before_action :authenticate_admin!
   def index
   	@orders = Order.all
   end
@@ -20,6 +21,7 @@ class Admins::OrdersController < ApplicationController
         end
       end
       redirect_to admins_order_path(@order)
+
     elsif params[:select_value] == "2"
       @order_product = OrderProduct.find_by(product_id: params[:product_id], id: params[:id])
       @order_product.update(order_product_params)

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     registrations: "public/customers/registrations"
   }
 
+
   devise_for :admins, controllers: {
     sessions: "admins/sessions"
   }
@@ -51,6 +52,8 @@ Rails.application.routes.draw do
 
   namespace :admins do
   	resources :products, only:[:index, :new, :create, :show, :edit, :update]
+    get '/top', to: 'products#top'
+
   end
 
   namespace :admins do

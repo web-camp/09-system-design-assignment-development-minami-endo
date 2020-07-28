@@ -1,6 +1,20 @@
 class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
-    root_path
+    case resource
+    when Admin
+      admins_top_path
+    when Customer
+      root_path
+    end
+  end
+
+  def after_sign_out_path_for(resource)
+    case resource
+    when Admin
+      new_admin_session_path
+    when Customer
+      new_customer_session_path
+    end
   end
 
   def application
@@ -8,6 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+
 
   protected
 
