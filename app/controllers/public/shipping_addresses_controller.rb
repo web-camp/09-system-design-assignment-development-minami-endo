@@ -1,11 +1,12 @@
 class Public::ShippingAddressesController < ApplicationController
   def index
     @shipping_address = ShippingAddress.new
-    @shipping_addresses = ShippingAddress.all
+    @shipping_addresses = current_customer.shipping_addresses
   end
 
   def create
     @shipping_address = ShippingAddress.new(public_shipping_address_params)
+    @shipping_address.customer_id = current_customer.id
     @shipping_address.save
     redirect_to public_shipping_addresses_index_path
   end

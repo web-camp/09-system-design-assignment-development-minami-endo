@@ -8,6 +8,6 @@
 
 <%= link_to "退会しない", public_customers_my_page_path, class:"btn btn-primary" %>
 
-<% if customer_signed_in? && @customer.id == current_customer.id %>
-  <%= link_to "退会", public_customers_withdraw_path(current_customer), method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
-<% end %>
+
+<%= link_to "退会", public_customers_withdraw_path(@customer), method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
+

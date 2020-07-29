@@ -27,9 +27,11 @@
 	<h2>おすすめ商品</h2>
 	  <div>
 		<% @products.each do |product| %>
-		  <%= attachment_image_tag product, :image, size: '75x50' %>
-		  <%= product.name %>
-		  <%= number_to_currency(product.non_taxed_price.to_i * 1.1, unit: "￥", strip_insignificant_zeros: true) %>
+			<%= link_to public_product_path(product) do %>
+			  <%= attachment_image_tag product, :image, size: '75x50' %>
+			<% end %>
+			<%= product.name %>
+	        <%= number_to_currency(product.non_taxed_price.to_i * 1.1, unit: "￥", strip_insignificant_zeros: true) %>
 		<% end %>
       </div>
 	     <%= paginate @products %>

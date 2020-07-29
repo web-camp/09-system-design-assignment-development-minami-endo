@@ -5,13 +5,6 @@ class Public::ProductsController < ApplicationController
     @products = Product.page(params[:page]).per(4)
   end
 
-  def genre_search
-    @genres = Genre.all
-    @genre = Genre.find(params[:id])
-    @products = @genre.products
-    @product_count = Product.count
-  end
-
   def index
     @genres = Genre.all
 

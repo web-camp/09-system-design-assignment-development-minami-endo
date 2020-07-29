@@ -31,12 +31,12 @@ class Admins::OrdersController < ApplicationController
       end
 
       total = 0
-      @order_product.product.order_products.each do |order_product|
-        if params[:order_product][:production_status] == "production_completed"
+      @order_product.order.order_products.each do |order_product|
+        if order_product.production_status == "production_completed"
           total += 1
         end
       end
-      if total == @order_product.count
+      if total == @order_product.order.order_products.length
         @order_product.order.update(order_status: "preparation_for_shipment")
       end
       redirect_to admins_order_path(@order_product.order.id)

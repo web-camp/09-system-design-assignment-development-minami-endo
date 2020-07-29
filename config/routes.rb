@@ -22,14 +22,13 @@ Rails.application.routes.draw do
 
   namespace :public do
     resources :products, only:[:index, :show, :top]
-    get '/products/genre_search', to: 'products#genre_search'
-
+    get '/products/genre_search', to: 'products#genre_search', as: 'products_genre_search'
   end
 
   namespace :public do
     resources :customers, only:[:edit, :update]
     get '/customers/unsubscribe', to: 'customers#unsubscribe'
-    patch '/customers/withdraw', to: 'customers#withdraw'
+    patch '/customers/:id/withdraw', to: 'customers#withdraw', as: 'customers_withdraw'
     get '/customers/my_page', to: 'customers#show'
   end
 

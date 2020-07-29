@@ -9,7 +9,7 @@
       <% @genres.each do |genre| %>
       <% if genre.is_active == "effectiveness" %>
       <div>
-  	    <%= link_to genre.name, public_products_genre_search_path(genre) %>
+  	    <%= genre.name %>
       </div>
       <% end %>
       <% end %>

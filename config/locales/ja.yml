@@ -21,4 +21,8 @@ ja:
         awaiting_production: "製作待ち"
         in_production: "製作中"
         production_completed: "製作完了"
+    customer:
+      is_deleted:
+        available: "有効"
+        withdrawal: "退会済み"
 

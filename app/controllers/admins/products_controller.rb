@@ -7,7 +7,13 @@ class Admins::ProductsController < ApplicationController
   end
 
   def top
-    @order = Order.all
+    @orders = Order.all
+    @today_order = 0
+    @orders.each do |order|
+      if order[:created_at].to_s.match(/#{Date.today.to_s}.+/)
+        @today_order += 1
+      end
+    end
   end
 
   def new

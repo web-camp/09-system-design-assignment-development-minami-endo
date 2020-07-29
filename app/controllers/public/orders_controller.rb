@@ -28,6 +28,7 @@ class Public::OrdersController < ApplicationController
       @order.postage = POSTAGE
       @order.method_of_payment = @method_of_payment
       @order.billing_amount = @price_on_purchase + POSTAGE
+
     elsif params[:select] == "2"
       @select_address = ShippingAddress.find(params[:order][:shipping_address_id])
       @address = @select_address.address_info
@@ -75,6 +76,13 @@ class Public::OrdersController < ApplicationController
     order.postage = POSTAGE
     order.save
 
+    shipping_address = ShippingAddress.new
+    shipping_address.addressee = params[:order][:name]
+    shipping_address.postal_code = params[:order][:postal_code]
+    shipping_address.address = params[:order][:address]
+    shipping_address.customer_id = params[:order][:customer_id]
+    shipping_address.save
+
     cart_products = current_customer.cart_products
     cart_products.each do |cart_product|
       if cart_product.product.is_active == "now_sale"
@@ -89,13 +97,11 @@ class Public::OrdersController < ApplicationController
 
     cart_products.destroy_all
     redirect_to public_orders_completed_path
-
   end
 
   def index
     @orders = current_customer.orders
     order_products = OrderProduct.all
-
   end
 
   def show
