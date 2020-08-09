@@ -18,7 +18,7 @@
 //= require_tree .
 $(document).ready(function(){
 	$("#theTarget").skippr({
-		transition: 'slide'
+		transition: 'slide',
 		speed : 1000,
         easing : 'easeOutQuart',
         navType : 'block',
