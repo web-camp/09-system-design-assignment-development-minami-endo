@@ -2,7 +2,7 @@
 lock "~> 3.14.1"
 
 set :application, "09-system-design-assignment-development-minami-endo"
-set :repo_url, "git@github.com:web-camp/09-system-design-assignment-development-minami-endo.git"
+set :repo_url, "https@github.com:web-camp/09-system-design-assignment-development-minami-endo.git"
 set :deploy_to, "/home/ec2-user/09-system-design-assignment-development-minami-endo"
 set :rbenv_ruby, '2.5.7'
 set :linked_files, %w{config/master.key .env}
