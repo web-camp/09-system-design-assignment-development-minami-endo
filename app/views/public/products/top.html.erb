@@ -1,0 +1,40 @@
+<h1>Public::Products#top</h1>
+<p>Find me in app/views/public/products/top.html.erb</p>
+
+<h1>public/top</h1>
+
+<div class="row">
+  <div class="col-lg-2">
+	<div class="border">ジャンル検索</div>
+    <div class="border">
+      <% @genres.each do |genre| %>
+      <div>
+  	    <%= genre.name %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-10">
+  	<div class="col-lg-1"></div>
+  	  <div class="col-lg-9">
+		<p>
+		ようこそ、NaganoCafeへ！<br>
+		このサイトは、ケーキ販売のECサイトになります。<br>
+		会員でない方も商品の閲覧はできますが、<br>
+		購入には会員登録が必要になります。
+		</p>
+
+	<h2>おすすめ商品</h2>
+	  <div>
+		<% @products.each do |product| %>
+			<%= link_to public_product_path(product) do %>
+			  <%= attachment_image_tag product, :image, size: '75x50' %>
+			<% end %>
+			<%= product.name %>
+	        <%= number_to_currency(product.non_taxed_price.to_i * 1.1, unit: "￥", strip_insignificant_zeros: true) %>
+		<% end %>
+      </div>
+	     <%= paginate @products %>
+    </div>
+  </div>
+</div>
