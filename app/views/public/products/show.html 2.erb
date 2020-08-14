@@ -1,0 +1,33 @@
+<h1>Public::Products#show</h1>
+<p>Find me in app/views/public/products/show.html.erb</p>
+
+
+<div class="row">
+  <div class="col-lg-2">
+	<div class="border">ジャンル検索</div>
+    <div class="border">
+      <% @genres.each do |genre| %>
+      <% if genre.is_active == "effectiveness" %>
+      <div>
+  	    <%= genre.name %>
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-4">
+	<%= attachment_image_tag @product, :image, size: '300x200' %>
+  </div>
+  <div class="col-lg-6">
+	<span class="name"><%= @product.name %></span><br>
+	<span><%= @product.caption %></span>
+	<p><%= number_to_currency(@product.non_taxed_price.to_i * 1.1, unit: "￥", strip_insignificant_zeros: true) %>（税込）</p>
+  <% if @product.is_active == "sold_out" %>
+      <span>売り切れ</span>
+  <% end %>
+	<%= form_for(@cart_product, url: public_cart_products_path, method: :post) do |f| %>
+	  <%= f.select :count, [*1..10], include_blank: "個数を選択してください" %>
+	  <%= f.hidden_field :product_id, value: @product.id %>
+	  <%= f.submit "カートに入れる", class:"btn btn-primary" %>
+	<% end %>
+  </div>
