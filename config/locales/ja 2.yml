@@ -1,0 +1,28 @@
+ja:
+  enums:
+    product:
+      is_active:
+        now_sale: "販売中"
+        sold_out: "販売停止"
+    genre:
+      is_active:
+        effectiveness: "有効"
+        unavailable: "無効"
+    order:
+      order_status:
+        wating_for_payment: "入金待ち"
+        payment_comfirmation: "入金確認"
+        in_production: "製作中"
+        preparation_for_shipment: "発送準備中"
+        sent: "発送済み"
+    order_product:
+      production_status:
+        cannot_be_manufactured: "製作不可"
+        awaiting_production: "製作待ち"
+        in_production: "製作中"
+        production_completed: "製作完了"
+    customer:
+      is_deleted:
+        available: "有効"
+        withdrawal: "退会済み"
+

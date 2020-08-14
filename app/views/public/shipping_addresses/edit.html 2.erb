@@ -1,0 +1,14 @@
+<h1>Public::ShippingAddresses#edit</h1>
+<p>Find me in app/views/public/shipping_addresses/edit.html.erb</p>
+
+<h1>配送先編集</h1>
+
+<%= form_for(@shipping_address, url: public_shipping_address_path, method: :patch) do |f| %>
+  <span>郵便番号（ハイフンなし）</span>
+  <%= f.text_field :postal_code %>
+  <span>住所</span>
+  <%= f.text_field :address %>
+  <span>宛名</span>
+  <%= f.text_field :addressee %>
+  <%= f.submit "編集する", class:"btn btn-primary" %>
+<% end %>

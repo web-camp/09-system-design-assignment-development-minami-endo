@@ -1,0 +1,42 @@
+<h1>Public::Products#index</h1>
+<p>Find me in app/views/public/products/index.html.erb</p>
+
+<div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
+<script>
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 8
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbt42uQKBG-Ncrikee1YPN4_GRBNt3YFw&callback=initMap" async defer></script>
+
+<div class="row">
+  <div class="col-lg-2">
+	<div class="border">ジャンル検索</div>
+    <div class="border">
+      <% @genres.each do |genre| %>
+      <% if genre.is_active == "effectiveness" %>
+      <div>
+  	    <%= genre.name %>
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-10">
+	<h2>商品一覧</h2><h4>全<%= @product_count %>件</h4>
+		<% @products.each do |product| %>
+    <% if product.genre.is_active == "effectiveness" %>
+  		  <%= attachment_image_tag product, :image, size: '150x100' %>
+  		  <%= link_to product.name, public_product_path(product.id) %>
+        <%= number_to_currency(product.non_taxed_price.to_i * 1.1, unit: "￥", strip_insignificant_zeros: true) %>
+      <% if product.is_active == "sold_out" %>
+        <span>売り切れ</span>
+      <% end %>
+	 <% end %>
+   <% end %>
+  </div>
+</div>

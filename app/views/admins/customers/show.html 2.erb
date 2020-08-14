@@ -1,0 +1,46 @@
+<h1>Admins::Customers#show</h1>
+<p>Find me in app/views/admins/customers/show.html.erb</p>
+
+<h1><%= @customer.first_name %><%= @customer.last_name %>さんの会員詳細</h1>
+
+<p>
+	<span>顧客ID</span>
+	<%= @customer.id %>
+	<span>会員ステータス</span>
+</p>
+
+<p>
+	<span>氏名</span>
+	<%= @customer.first_name %><%= @customer.last_name %>
+</p>
+
+<p>
+	<span>フリガナ</span>
+	<%= @customer.first_name_katakana %><%= @customer.last_name_katakana %>
+</p>
+
+<p>
+	<span>郵便番号</span>
+	<%= @customer.postal_code %>
+</p>
+
+<p>
+	<span>住所</span>
+	<%= @customer.address %>
+</p>
+
+<p>
+	<span>電話番号</span>
+	<%= @customer.phone_number %>
+</p>
+
+<p>
+	<span>メールアドレス</span>
+	<%= @customer.email %>
+</p>
+
+
+<%= link_to "編集する", edit_admins_customer_path(@customer), class:"btn btn-primary" %>
+<p>注文履歴一覧リンクボタン</p>
+
+

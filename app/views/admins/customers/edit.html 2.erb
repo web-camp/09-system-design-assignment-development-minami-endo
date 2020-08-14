@@ -1,0 +1,50 @@
+<h1>Admins::Customers#edit</h1>
+<p>Find me in app/views/admins/customers/edit.html.erb</p>
+
+<h1><%= @customer.first_name %><%= @customer.last_name %>さんの会員情報編集</h1>
+
+<%= form_for(@customer, url: admins_customer_path, method: :patch) do |f| %>
+
+<p>
+	<span>会員ID</span>
+	<%= @customer.id %>
+</p>
+
+<p>
+	<span>氏名</span>
+	<%= f.text_field :first_name %><%= f.text_field :last_name %>
+</p>
+
+<p>
+	<span>フリガナ</span>
+	<%= f.text_field :first_name_katakana %><%= f.text_field :last_name_katakana %>
+</p>
+
+<p>
+	<span>郵便番号</span>
+	<%= f.text_field :postal_code %>
+</p>
+
+<p>
+	<span>住所</span>
+	<%= f.text_field :address %>
+</p>
+
+<p>
+	<span>電話番号</span>
+	<%= f.text_field :phone_number %>
+</p>
+
+<p>
+	<span>メールアドレス</span>
+	<%= f.text_field :email %>
+</p>
+
+<p>会員ステータス</p>
+
+<%= f.submit "変更を保存する", class:"btn btn-primary" %>
+
+<% end %>
+
+
+

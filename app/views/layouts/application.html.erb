@@ -7,6 +7,13 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+    /* マップを表示する div 要素の高さを必ず明示的に指定します。 */
+    #map {
+      height: 400px;
+      width: 600px;
+    }
+    </style>
   </head>
 
   <body>
